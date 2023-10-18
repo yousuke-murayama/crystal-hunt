@@ -20,12 +20,12 @@ export default class GameOverScene extends Phaser.Scene {
   preload() {}
 
   create() {
-    this.text = this.add.text(270, 200, 'Game Over', { backgroundColor: "#880000", color: "#AAAAAA", fontSize: '42px' });
+    this.text = this.add.text(280, 200, 'Game Over', { backgroundColor: "#880000", color: "#AAAAAA", fontSize: '42px' });
 
-    this.totalScoreText = this.add.text(270, 250, `your score: ${totalScore}pt`, { color: "#AAAAAA", fontSize: '22px' });
-    this.continueText = this.add.text(310, 350, 'CONTINUE?', { color: "#AAAAAA", fontSize: '30px' });
+    this.totalScoreText = this.add.text(280, 250, `your score: ${totalScore}pt`, { color: "#00CCFF", fontSize: '22px' });
+    this.continueText = this.add.text(320, 350, 'CONTINUE?', { color: "#AAAAAA", fontSize: '30px' });
     this.continueText = this.add.text(270, 400, 'YES!!', { color: "#AAAAAA", fontSize: '22px' });
-    this.continueText = this.add.text(450, 400, 'NO…', { color: "#AAAAAA", fontSize: '22px' });
+    this.continueText = this.add.text(470, 400, 'NO…', { color: "#AAAAAA", fontSize: '22px' });
 
     const yes = this.add.zone(290, 400, 70, 30);
     yes.setInteractive({

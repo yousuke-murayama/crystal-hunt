@@ -6,6 +6,8 @@ export type GameObjectWithBody = Phaser.Types.Physics.Arcade.GameObjectWithBody;
 export let currentScore = 0;
 export let totalScore = 0;
 
+const gems = ["blue", "green", "yellow"];
+
 export default class MainScene extends Phaser.Scene {
   private cursors?: Phaser.Types.Input.Keyboard.CursorKeys;
   private player!: Physics;
@@ -37,6 +39,12 @@ export default class MainScene extends Phaser.Scene {
     this.load.spritesheet('light', 'assets/pipo-hikarimono001.png', {
       frameWidth: 32, frameHeight: 32, startFrame: 9
     });
+    this.load.spritesheet('green', 'assets/pipo-etcchara002b.png',
+      {  frameWidth: 32, frameHeight: 32, startFrame: 8 }
+    );
+    this.load.spritesheet('yellow', 'assets/pipo-etcchara002c.png',
+      {  frameWidth: 32, frameHeight: 32, startFrame: 8 }
+    );
   }
 
   create() {
@@ -46,9 +54,7 @@ export default class MainScene extends Phaser.Scene {
     this.scoreText = this.add.text(16, 16, `score: ${currentScore}pt`, { fontSize: '22px', color: '#f5f5f5' })
 
     for(let i = 0; i <= 4; i++) {
-      const x = Phaser.Math.Between(15, 750);
-      const y = Phaser.Math.Between(15, 550);
-      this.gemGroup.create(x, y, 'gem');
+      this.createGems();
     }
 
     this.player.setBounce(0.2);
@@ -127,9 +133,7 @@ export default class MainScene extends Phaser.Scene {
 
       if(this.gemGroup.countActive(true) === 0) {
         for(let i = 0; i <= 4; i++) {
-          const x = Phaser.Math.Between(15, 750);
-          const y = Phaser.Math.Between(15, 550);
-          this.gemGroup.create(x, y, 'gem');
+          this.createGems();
         }
       }
 
@@ -180,5 +184,22 @@ export default class MainScene extends Phaser.Scene {
 
       this.gameOver = true;
       this.scoreText.setText('Game Over');
+    }
+
+    createGems() {
+      const x = Phaser.Math.Between(15, 750);
+      const y = Phaser.Math.Between(15, 550);
+
+      const gemName = gems[Math.floor(Math.random() * 3)];
+
+      if(gemName === "blue") {
+        this.gemGroup.create(x, y, 'gem');
+      }
+      if(gemName === "green") {
+        this.gemGroup.create(x, y, 'green');
+      }
+      if(gemName === "yellow") {
+        this.gemGroup.create(x, y, 'yellow');
+      }
     }
 }
